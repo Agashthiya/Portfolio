@@ -1,0 +1,321 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agashthiya M | Data Scientist Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.emailjs.com/sdk/3.2.0/email.min.js"></script>
+  <script>
+    (function(){
+       emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS Public Key
+    })();
+  </script>
+
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box;}
+    body {font-family: "Poppins", sans-serif; background-color: #f8f9fa; color: #333;}
+    html { scroll-behavior: smooth; }
+
+    /* Navbar */
+    header {
+      position: fixed; width: 100%; top: 0; left: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem; z-index: 1000; transition: 0.3s;
+    }
+    header h1 { font-size: 1.8rem; color: #2a5298; transition: 0.3s;}
+    nav a {
+      color: #2a5298; margin-left: 1.5rem; text-decoration: none;
+      font-weight: 500; transition: 0.3s;
+    }
+    header.scrolled {
+      background: rgba(42, 82, 152, 0.85); 
+      backdrop-filter: blur(10px);
+    }
+    header.scrolled h1, header.scrolled nav a { color: white; }
+
+    /* Glassmorphism Hero */
+    .hero {
+      position: relative; min-height: 85vh;
+      display: flex; justify-content: center; align-items: center;
+      text-align: center; overflow: hidden;
+      background: linear-gradient(135deg, #f0f4ff, #dbeafe);
+    }
+    .hero-overlay {
+      position: absolute; width: 100%; height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png');
+      opacity: 0.12;
+    }
+    .hero-card {
+      position: relative; background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(12px); border-radius: 20px; padding: 2.5rem 2rem;
+      max-width: 600px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    .hero-card h2 { font-size: 2.3rem; margin-bottom: 0.3rem; color: #1e3c72; }
+    .hero-card h3 { font-size: 1.2rem; margin-bottom: 1rem; color: #2a5298; }
+    .hero-card p { font-size: 1rem; color: #333; margin-bottom: 1.2rem; }
+
+    .hero-buttons .btn {
+      display: inline-block; margin: 0.4rem; padding: 0.6rem 1.3rem;
+      border-radius: 5px; font-weight: 600; text-decoration: none;
+      border: 2px solid #2a5298; color: #2a5298; background: white; transition: 0.3s;
+    }
+    .hero-buttons .btn.fill {
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+      color: white; border-color: transparent;
+    }
+    .hero-buttons .btn:hover { background: #2a5298; color: white; }
+    .hero-buttons .btn.fill:hover { background: #1e3c72; }
+
+    /* Sections */
+    section { max-width: 1100px; margin: auto; padding: 4rem 1rem; }
+    .section-title {
+      text-align: center; font-size: 2rem; font-weight: 700;
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 2.5rem;
+    }
+
+    /* About */
+    .about {
+      background: white; padding: 2rem; border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      max-width: 800px; margin: auto; text-align: center;
+      font-size: 1.05rem; line-height: 1.7;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;
+    }
+    .card {
+      background: white; border-radius: 10px; padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;
+    }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0,0,0,0.1);}
+    .card i { font-size: 2rem; color: #2a5298; margin-bottom: 0.5rem; }
+
+    /* Projects */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;
+    }
+    .project-card {
+      background: white; border-radius: 10px; padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; transition: 0.3s;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+    .project-card i { font-size: 2.5rem; color: #2a5298; margin-bottom: 0.7rem; }
+    .project-card h3 { color: #2a5298; }
+    .view-btn {
+      display: inline-block; margin-top: 1rem; padding: 0.5rem 1rem;
+      background: #2a5298; color: white; border-radius: 5px; font-size: 0.9rem;
+      text-decoration: none; transition: 0.3s;
+    }
+    .view-btn:hover { background: #1e3c72; }
+
+    /* Experience & Education */
+    .info-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+    .info-card {
+      background: white; border-radius: 10px; padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s;
+    }
+    .info-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.1);}
+    .info-card h3 { color: #2a5298; margin-top: 0; }
+
+    /* Contact Form */
+    .contact-form {
+      max-width: 600px; margin: auto; background: white; padding: 2rem;
+      border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 0.7rem; margin: 0.5rem 0;
+      border: 1px solid #ccc; border-radius: 5px; font-family: "Poppins", sans-serif;
+    }
+    .contact-form button {
+      background: #2a5298; color: white; padding: 0.7rem 1.5rem;
+      border: none; border-radius: 5px; cursor: pointer; transition: 0.3s;
+    }
+    .contact-form button:hover { background: #1e3c72; }
+
+    /* Footer */
+    footer {
+      background: #212529;
+      color: #ccc;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+    }
+    footer a { color: #2a87ff; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-social { margin: 1rem 0; }
+    .footer-social a {
+      color: white;
+      margin: 0 0.5rem;
+      font-size: 1.5rem;
+      display: inline-block;
+      transition: 0.3s;
+    }
+    .footer-social a:hover { color: #2a87ff; }
+
+    /* Fade-in Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Agashthiya M</h1>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="hero fade-in">
+  <div class="hero-overlay"></div>
+  <div class="hero-card">
+    <h2>Agashthiya M</h2>
+    <h3>Data Scientist | Data Analyst</h3>
+    <p>Turning complex data into clear insights with Python, SQL, Machine Learning, and BI tools.</p>
+    <div class="hero-buttons">
+      <a href="#" class="btn fill">Download CV</a>
+      <a href="https://linkedin.com/in/agashthiya-malliah" target="_blank" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
+      <a href="https://github.com/Agashthiya" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="fade-in">
+  <h2 class="section-title">About Me</h2>
+  <div class="about">
+    I am a dedicated <b>Data Scientist & Analyst</b> with expertise in <b>Python, SQL, Power BI, and Machine Learning</b>.
+    I specialize in <b>predictive modeling, data visualization, and process optimization</b>, turning data into
+    actionable strategies to drive <b>business growth and innovation</b>.
+  </div>
+</section>
+
+<section id="skills" class="fade-in">
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="card">
+      <i class="fab fa-python"></i>
+      <h3>Python</h3>
+    </div>
+    <div class="card">
+      <i class="fas fa-database"></i>
+      <h3>SQL</h3>
+    </div>
+    <div class="card">
+      <i class="fas fa-chart-line"></i>
+      <h3>Power BI</h3>
+    </div>
+    <div class="card">
+      <i class="fas fa-brain"></i>
+      <h3>Machine Learning</h3>
+    </div>
+    <div class="card">
+      <i class="fab fa-git-alt"></i>
+      <h3>Git</h3>
+    </div>
+    <div class="card">
+      <i class="fas fa-chart-pie"></i>
+      <h3>Tableau</h3>
+    </div>
+    <div class="card">
+      <i class="fas fa-percentage"></i>
+      <h3>Statistical Analysis</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="fade-in">
+  <h2 class="section-title">Projects</h2>
+  <div class="projects-grid">
+    <div class="project-card"><i class="fas fa-phone"></i><h3>Telecom Churn Prediction</h3><p>Predicted customer churn to improve retention strategies for telecom services.</p><a href="https://github.com/Agashthiya/Telecom_Churn" target="_blank" class="view-btn">View Project</a></div>
+    <div class="project-card"><i class="fas fa-bicycle"></i><h3>Bicycle Rental Demand Forecasting</h3><p>Forecasted daily rental demand to optimize resource allocation and planning.</p><a href="https://github.com/Agashthiya/BikeRental" target="_blank" class="view-btn">View Project</a></div>
+    <div class="project-card"><i class="fas fa-home"></i><h3>House Price Prediction</h3><p>Predicted house prices to support real-estate investment decisions and pricing strategies.</p><a href="https://github.com/Agashthiya/Housepriceprediction" target="_blank" class="view-btn">View Project</a></div>
+    <div class="project-card"><i class="fas fa-shield-alt"></i><h3>Insurance Purchase Prediction</h3><p>Identified potential buyers to enhance targeted marketing for insurance products.</p><a href="https://github.com/Agashthiya/InsuranceClaim" target="_blank" class="view-btn">View Project</a></div>
+    <div class="project-card"><i class="fas fa-heart"></i><h3>Heart Disease Risk Prediction</h3><p>Analyzed patient data to identify trends and improve healthcare outcomes.</p><a href="https://github.com/Agashthiya/HeartDisease" target="_blank" class="view-btn">View Project</a></div>
+    <div class="project-card"><i class="fas fa-users"></i><h3>INX Employee Performance</h3><p>Analyzed HR metrics to predict employee performance with machine learning.</p><a href="https://github.com/Agashthiya/Employee_Performance" class="view-btn" target="_blank">View Project</a> </div>
+    </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience" class="fade-in">
+  <h2 class="section-title">Experience</h2>
+  <div class="info-grid">
+    <div class="info-card"><h3>Data Science Consultant Intern</h3><p><b>Rubixe</b> | Aug 2024 – Feb 2025</p><p>Developed ML models, performed data preprocessing, and built dashboards to deliver actionable insights.</p></div>
+  </div>
+</section>
+
+<!-- Education Section -->
+<section id="education" class="fade-in">
+  <h2 class="section-title">Education</h2>
+  <div class="info-grid">
+    <div class="info-card"><h3>Electrical and Electronics Engineering</h3><p>Mepco Schlenk Engineering College | CGPA: 8.2/10</p></div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+
+
+<!-- Footer -->
+<footer class="fade-in">
+  <div class="footer-content">
+    <p><b>Contact Information</b></p>
+    <p>Email: <a href="mailto:agashthiyamalliah99@gmail.com">agashthiyamalliah99@gmail.com</a></p>
+    <p>Location: Bangalore, India</p>
+
+    <div class="footer-social">
+      <a href="https://github.com/Agashthiya" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/agashthiya-malliah" target="_blank"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p>© 2025 Agashthiya M. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    document.querySelector('header').classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
